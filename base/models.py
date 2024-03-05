@@ -17,3 +17,15 @@ class Room(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Message(models.Model):
+    # user =
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    body = models.TextField()
+    updated = models.DateTimeField(auto_now = True)
+
+    #auto_now_add will only take a snapshot once when the record is created
+    created = models.DateTimeField(auto_now_add = True)
+# This below is to return the first 50 characters. We do not want to cram the django admin panel
+    def __str__(self):
+        return self.body[0:50]
